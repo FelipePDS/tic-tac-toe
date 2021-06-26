@@ -14,7 +14,7 @@ export function CellsContextProvider({ children }) {
 
   const [boardLines, setBoardLines] = useState(boardLinesProps);
 
-  function toggleCell(lineIndex, cellIndex) {
+  function addCellPlay(lineIndex, cellIndex) {
     const cellIsMarked = boardLines[lineIndex][0].cells[cellIndex].isMarked;
 
     if (!cellIsMarked) {
@@ -29,13 +29,22 @@ export function CellsContextProvider({ children }) {
   }
 
   function restartBoardLines() {
+    boardLinesProps.forEach(([ line ]) => {
+      line.cells.forEach(cell => {
+
+        cell.isMarked = false;
+        cell.playerMarkedCell = '';
+
+      });
+    });
+
     setBoardLines(boardLinesProps);
   }
 
   return (
     <CellsContext.Provider value={{
       boardLines,
-      toggleCell,
+      addCellPlay,
       restartBoardLines
     }}>
       {children}
