@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+
+  user-select: none;
+}
+
+html {
+  font-size: 70%;
+}
+
+body,
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 140%;
+  
+  color: #e8e9f3;
+  background-color: #222530;
+}
+
+body,
+#root,
+input,
+button,
+textarea,
+select {
+  font-weight: 500;
+  font-family: Poppins;
+  font-size: 1.6rem;
+}
