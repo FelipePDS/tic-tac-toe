@@ -1,0 +1,69 @@
+.board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.board-container .board-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.board-container .board-line .cell {
+  width: 9rem;
+  height: 9rem;
+
+  border: 1px #e8e9f3 solid;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-container .board-line .cell.isMarked {
+  cursor: default;
+}
+
+.board-container .board-line .cell:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.board-container .board-line .cell img {
+  height: 50px;
+  animation: addPlayer .4s;
+}
+
+@keyframes addPlayer {
+  0% {
+    height: 0;
+  }
+
+  50% {
+    height: 55px;
+  }
+
+  100% {
+    height: 50px;
+  }
+}
+
+.board-container .board-line .border-top-none {
+  border-top: none;
+}
+
+.board-container .board-line .border-right-none {
+  border-right: none;
+}
+
+.board-container .board-line .border-bottom-none {
+  border-bottom: none;
+}
+
+.board-container .board-line .border-left-none {
+  border-left: none;
+}
