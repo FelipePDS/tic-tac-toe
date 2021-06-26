@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useCellsContext } from '../../contexts/CellsContext';
+import { useGameContext } from '../../contexts/GameContext';
 
 import PlayerTimes from '../../assets/times.png';
 import PlayerCircle from '../../assets/circle.png';
@@ -10,8 +11,14 @@ import './styles.css';
 function GameBoard() {
   const { 
     boardLines,
-    toggleCell
+    addCellPlay
   } = useCellsContext();
+
+  const { toggleRoundConditions } = useGameContext();
+
+  useEffect(() => {
+    toggleRoundConditions();
+  }, [addCellPlay, toggleRoundConditions]);
 
   return (
     <div className="board-container">
@@ -29,7 +36,7 @@ function GameBoard() {
                     ${cell.isMarked && 'isMarked'}`
                   }
 
-                  onClick={() => toggleCell(lineIndex, cellIndex)}
+                  onClick={() => addCellPlay(lineIndex, cellIndex)}
                 >
                   {
                     cell.playerMarkedCell === 'times'
