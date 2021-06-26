@@ -7,6 +7,7 @@ import { GameContextProvider } from '../../contexts/GameContext';
 import PlayerTurnBoard from '../PlayerTurnBoard';
 import GameBoard from '../GameBoard';
 import Scoreboard from '../Scoreboard';
+import GameStatusPopUp from '../GameStatusPopUp';
 
 function Game() {
   return (
@@ -17,6 +18,7 @@ function Game() {
           <PlayerTurnBoard />
           <GameBoard />
           <Scoreboard />
+          <GameStatusPopUp />
 
         </GameContextProvider>
       </CellsContextProvider>
