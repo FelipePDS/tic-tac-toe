@@ -1,0 +1,13 @@
+.player-turn-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  margin-bottom: 5rem;
+}
+
+.player-turn-board-container img {
+  height: 50px;
+  margin-left: 1rem;
+}
