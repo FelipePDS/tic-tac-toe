@@ -1,0 +1,71 @@
+.scoreboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: absolute;
+  bottom: 50%;
+  right: 4rem;
+
+  font-size: 1.6rem;
+
+  width: 13rem;
+  height: 14.5rem;
+
+  background-color: #2f3444;
+
+  border: 1px #1a1a20 solid;
+  border-radius: 1rem;
+
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.scoreboard-container p {
+  margin-bottom: 1.5rem;
+}
+
+.scoreboard-container .player-scores .score {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  font-size: 1.2rem;
+}
+
+.scoreboard-container .player-scores .score+.score {
+  margin-top: .7rem;
+}
+
+.scoreboard-container .player-scores .score img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  height: 30px;
+  margin-right: .7rem;
+}
+
+.scoreboard-container .player-scores .score .score-player-1 {
+  color: #2ab0eb;
+}
+
+.scoreboard-container .player-scores .score .score-player-2 {
+  color: #ee2b32;
+}
+
+@media(max-width: 800px) {
+  body {
+      height: auto;
+      padding: 3rem;
+  }
+
+  .scoreboard-container {
+      position: static;
+      margin-top: 5rem;
+  }
+}
