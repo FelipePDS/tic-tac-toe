@@ -1,9 +1,9 @@
-# <h1 align="center">TIK-TAK-TOE</h1>
+# <h1 align="center">TIC-TAC-TOE</h1>
 
 <!-- imagem -->
 
 <p align="center">
-    <a href="https://github.com/FelipePDS/tic-tac-toe/blob/main/LICENSE"><img src="https://img.shields.io/github/license/FelipePDS/tic-tac-toe?style=for-the-badge"></a> 
+    <a href="https://github.com/FelipePDS/tic-tac-toe/blob/main/LICENSE"><img src="https://img.shields.io/github/license/FelipePDS/tik-tac-toe?style=for-the-badge"></a> 
     <img src="https://img.shields.io/github/stars/FelipePDS/nps?style=for-the-badge"><br>
     <img src="https://img.shields.io/github/last-commit/FelipePDS/tic-tac-toe?style=for-the-badge">
     <img src="https://img.shields.io/github/repo-size/FelipePDS/tic-tac-toe?style=for-the-badge"/>
