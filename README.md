@@ -41,7 +41,7 @@ The game was made in [React.js](https://pt-br.reactjs.org/), using its Hooks and
 
 Download [Git Bash](https://git-scm.com/downloads) and perform the following commands in the Bash terminal:
 
-```
+``` bash
 # clone project
 $ git clone https://github.com/FelipePDS/tic-tac-toe.git
 
