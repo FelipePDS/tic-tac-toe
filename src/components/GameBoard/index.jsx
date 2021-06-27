@@ -11,14 +11,14 @@ import './styles.css';
 function GameBoard() {
   const { 
     boardLines,
-    addCellPlay
+    handleClick
   } = useCellsContext();
 
   const { toggleRoundConditions } = useGameContext();
 
   useEffect(() => {
     toggleRoundConditions();
-  }, [addCellPlay, toggleRoundConditions]);
+  }, [handleClick, toggleRoundConditions]);
 
   return (
     <div className="board-container">
@@ -36,7 +36,7 @@ function GameBoard() {
                     ${cell.isMarked && 'isMarked'}`
                   }
 
-                  onClick={() => addCellPlay(lineIndex, cellIndex)}
+                  onClick={() => handleClick(lineIndex, cellIndex)}
                 >
                   {
                     cell.playerMarkedCell === 'times'

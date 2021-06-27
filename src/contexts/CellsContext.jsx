@@ -14,7 +14,7 @@ export function CellsContextProvider({ children }) {
 
   const [boardLines, setBoardLines] = useState(boardLinesProps);
 
-  function addCellPlay(lineIndex, cellIndex) {
+  function handleClick(lineIndex, cellIndex) {
     const cellIsMarked = boardLines[lineIndex][0].cells[cellIndex].isMarked;
 
     if (!cellIsMarked) {
@@ -44,7 +44,7 @@ export function CellsContextProvider({ children }) {
   return (
     <CellsContext.Provider value={{
       boardLines,
-      addCellPlay,
+      handleClick,
       restartBoardLines
     }}>
       {children}
