@@ -34,9 +34,14 @@ export function GameContextProvider({ children }) {
   };
 
   const [score, setScore] = useState(scoreProps);
+  const [gameMode, setGameMode] = useState('computer');
   const [winningPlayerOfRound, setWinningPlayerOfRound] = useState('');
   const [tiedRound, setTiedRound] = useState(false);
   const [endRound, setEndRound] = useState(false);
+
+  function toggleGameMode(newGameMode) {
+    setGameMode(newGameMode);
+  }
 
   function startNewRound() {
     restartPlayers();
@@ -65,10 +70,10 @@ export function GameContextProvider({ children }) {
     startNewRound();
   }
   
-  function toggleRoundConditions() {
+  function calculateRoundConditions() {
     const player = playerTurn === 'times' ? 'circle' : 'times';
 
-    const playerIsWinner = winningPossibilities.map(winningPossibilitie => (
+    const winner = winningPossibilities.map(winningPossibilitie => (
 
       players[player].plays.map(play => (
         winningPossibilitie.filter(possibilitie => 
@@ -80,7 +85,7 @@ export function GameContextProvider({ children }) {
 
     )).find(playsComparedToWinning => playsComparedToWinning === true);
 
-    if (playerIsWinner) {
+    if (winner) {
       declareWinner(player);
     }
 
@@ -92,7 +97,9 @@ export function GameContextProvider({ children }) {
       });
     });
 
-    if (markedCellCounter === 9) {
+    const tie = markedCellCounter === 9;
+
+    if (tie) {
       declareTie();
     }
   }
@@ -100,7 +107,9 @@ export function GameContextProvider({ children }) {
   return (
     <GameContext.Provider value={{
       score,
-      toggleRoundConditions,
+      gameMode,
+      toggleGameMode,
+      calculateRoundConditions,
       winningPlayerOfRound,
       tiedRound,
       endRound
