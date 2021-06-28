@@ -14,11 +14,11 @@ function GameBoard() {
     handleClick
   } = useCellsContext();
 
-  const { toggleRoundConditions } = useGameContext();
+  const { calculateRoundConditions } = useGameContext();
 
   useEffect(() => {
-    toggleRoundConditions();
-  }, [handleClick, toggleRoundConditions]);
+    calculateRoundConditions();
+  }, [handleClick, calculateRoundConditions]);
 
   return (
     <div className="board-container">
