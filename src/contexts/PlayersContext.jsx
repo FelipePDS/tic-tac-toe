@@ -14,7 +14,17 @@ export function PlayerContextProvider({ children }) {
   };
 
   const [players, setPlayers] = useState(playersProps);
+  const [humanPlayer, setHumanPlayer] = useState(['times']);
+  const [computerPlayer, setComputerPlayer] = useState(['circle']);
   const [playerTurn, setPlayerTurn] = useState('times');
+
+  function toggleHumanPlayer(player) {
+    setHumanPlayer(player);
+  }
+
+  function toggleComputerPlayer(player) {
+    setComputerPlayer(player);
+  }
 
   function togglePlayerTurn() {
     setPlayerTurn(
@@ -36,6 +46,10 @@ export function PlayerContextProvider({ children }) {
   return (
     <PlayerContext.Provider value={{
       players,
+      humanPlayer,
+      computerPlayer,
+      toggleHumanPlayer,
+      toggleComputerPlayer,
       playerTurn,
       togglePlayerTurn,
       addPlayerPlay,

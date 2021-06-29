@@ -8,6 +8,8 @@ const GameContext = createContext();
 export function GameContextProvider({ children }) {
   const { 
     players,
+    toggleHumanPlayer,
+    toggleComputerPlayer,
     playerTurn,
     restartPlayers
   } = usePlayerContext();
@@ -34,13 +36,23 @@ export function GameContextProvider({ children }) {
   };
 
   const [score, setScore] = useState(scoreProps);
-  const [gameMode, setGameMode] = useState('computer');
+  const [gameMode, setGameMode] = useState('computer' || 'multiplayer');
   const [winningPlayerOfRound, setWinningPlayerOfRound] = useState('');
   const [tiedRound, setTiedRound] = useState(false);
   const [endRound, setEndRound] = useState(false);
 
   function toggleGameMode(newGameMode) {
     setGameMode(newGameMode);
+
+    if (newGameMode === 'computer') {
+      toggleHumanPlayer(['times']);
+      toggleComputerPlayer(['circle']);
+    }
+
+    if (newGameMode === 'multiplayer') {
+      toggleHumanPlayer(['times', 'circle']);
+      toggleComputerPlayer(['']);
+    }
   }
 
   function startNewRound() {
