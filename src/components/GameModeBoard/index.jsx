@@ -5,10 +5,7 @@ import { useGameContext } from '../../contexts/GameContext';
 import './styles.css';
 
 function GameModeBoard() {
-  const {
-    gameMode,
-    toggleGameMode
-  } = useGameContext();
+  const { toggleGameMode } = useGameContext();
 
   const [gameStarted, setGameStarted] = useState(false);
 
