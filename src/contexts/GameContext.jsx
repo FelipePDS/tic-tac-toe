@@ -11,11 +11,14 @@ export function GameContextProvider({ children }) {
     toggleHumanPlayer,
     toggleComputerPlayer,
     playerTurn,
+    togglePlayerTurn,
+    addPlayerPlay,
     restartPlayers
   } = usePlayerContext();
 
   const { 
     boardLines,
+    setBoardLines,
     restartBoardLines
   } = useCellsContext();
 
@@ -53,6 +56,36 @@ export function GameContextProvider({ children }) {
       toggleHumanPlayer(['times', 'circle']);
       toggleComputerPlayer(['']);
     }
+  }
+
+  function newPlayerPlay(lineIndex, cellIndex) {
+    const cellIsMarked = boardLines[lineIndex][0].cells[cellIndex].isMarked;
+
+    if (!cellIsMarked && !endRound) {
+      let newBoardLine = boardLines;
+      newBoardLine[lineIndex][0].cells[cellIndex].isMarked = true;
+      newBoardLine[lineIndex][0].cells[cellIndex].playerMarkedCell = playerTurn;
+
+      setBoardLines(newBoardLine);
+      addPlayerPlay(boardLines[lineIndex][0].cells[cellIndex].id, playerTurn);
+      togglePlayerTurn();
+    }
+  }
+
+  function handleHumanPlayerPlay(lineIndex, cellIndex) {
+    newPlayerPlay(lineIndex, cellIndex);
+  }
+
+  function handleComputerPlayerPlay() {
+    let lineIndex = 0;
+    let cellIndex = 0;
+
+    while (boardLines[lineIndex][0].cells[cellIndex].isMarked) {
+      lineIndex = Math.floor(Math.random(3) * 3);
+      cellIndex = Math.floor(Math.random(3) * 3);
+    }
+
+    newPlayerPlay(lineIndex, cellIndex);
   }
 
   function startNewRound() {
@@ -121,6 +154,8 @@ export function GameContextProvider({ children }) {
       score,
       gameMode,
       toggleGameMode,
+      handleHumanPlayerPlay,
+      handleComputerPlayerPlay,
       calculateRoundConditions,
       winningPlayerOfRound,
       tiedRound,
