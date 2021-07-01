@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { usePlayerContext } from '../../contexts/PlayersContext';
 import { useCellsContext } from '../../contexts/CellsContext';
 import { useGameContext } from '../../contexts/GameContext';
 
@@ -10,15 +11,34 @@ import './styles.css';
 
 function GameBoard() {
   const { 
-    boardLines,
-    handleClick
-  } = useCellsContext();
+    players,
+    computerPlayer,
+    playerTurn
+  } = usePlayerContext();
 
-  const { calculateRoundConditions } = useGameContext();
+  const { boardLines } = useCellsContext();
+
+  const {
+    calculateRoundConditions, 
+    handleHumanPlayerPlay,
+    handleComputerPlayerPlay
+  } = useGameContext();
 
   useEffect(() => {
     calculateRoundConditions();
-  }, [handleClick, calculateRoundConditions]);
+
+    if (computerPlayer.indexOf(playerTurn) > -1) {
+      handleComputerPlayerPlay();
+    }
+  }, [
+    handleHumanPlayerPlay, 
+    computerPlayer, 
+    playerTurn, 
+    calculateRoundConditions,
+    handleComputerPlayerPlay,
+    boardLines,
+    players
+  ]);
 
   return (
     <div className="board-container">
@@ -36,7 +56,7 @@ function GameBoard() {
                     ${cell.isMarked && 'isMarked'}`
                   }
 
-                  onClick={() => handleClick(lineIndex, cellIndex)}
+                  onClick={() => handleHumanPlayerPlay(lineIndex, cellIndex)}
                 >
                   {
                     cell.playerMarkedCell === 'times'
