@@ -75,30 +75,33 @@ export function GameContextProvider({ children }) {
   }
 
   function handleHumanPlayerPlay(lineIndex, cellIndex) {
-    if (humanPlayer.indexOf(playerTurn) < 0) return;
+    if (humanPlayer.indexOf(playerTurn) < 0 || endRound) return;
 
     newPlayerPlay(lineIndex, cellIndex);
   }
 
   function handleComputerPlayerPlay() {
-    if (computerPlayer.indexOf(playerTurn) < 0) return;
+    if (computerPlayer.indexOf(playerTurn) < 0 || endRound) return;
 
     let lineIndex = 0;
     let cellIndex = 0;
 
-    while (boardLines[lineIndex][0].cells[cellIndex].isMarked) {
-      lineIndex = Math.floor(Math.random(3) * 3);
-      cellIndex = Math.floor(Math.random(3) * 3);
-    }
+    do {
+      lineIndex = Math.floor(Math.random() * 3);
+      cellIndex = Math.floor(Math.random() * 3);
+    } while (
+      boardLines[lineIndex][0].cells[cellIndex].isMarked
+    );
 
-    newPlayerPlay(lineIndex, cellIndex);
+    setTimeout(() => {
+      newPlayerPlay(lineIndex, cellIndex);
+    }, 200);
   }
 
   function startNewRound() {
-    restartPlayers();
-    restartBoardLines();
-
     setTimeout(() => {
+      restartPlayers();
+      restartBoardLines();
       setEndRound(false);
     }, 1970);
   }
@@ -122,6 +125,8 @@ export function GameContextProvider({ children }) {
   }
   
   function calculateRoundConditions() {
+    if (endRound) return { endRound: true }
+    
     const player = playerTurn === 'times' ? 'circle' : 'times';
 
     const winner = winningPossibilities.map(winningPossibilitie => (

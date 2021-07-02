@@ -18,12 +18,14 @@ function GameBoard() {
   } = useGameContext();
 
   useEffect(() => {
+
     Promise.all([calculateRoundConditions()])
-      .then(([{ endRound }]) => {
-        if (!endRound) {
-          handleComputerPlayerPlay();
-        }
-      });
+    .then(([{ endRound }]) => {
+      if (!endRound) {
+        handleComputerPlayerPlay();
+      }
+    });
+    
   }, [
     calculateRoundConditions,
     handleComputerPlayerPlay
