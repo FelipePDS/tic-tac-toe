@@ -8,6 +8,8 @@ const GameContext = createContext();
 export function GameContextProvider({ children }) {
   const { 
     players,
+    humanPlayer,
+    computerPlayer,
     toggleHumanPlayer,
     toggleComputerPlayer,
     playerTurn,
@@ -61,7 +63,7 @@ export function GameContextProvider({ children }) {
   function newPlayerPlay(lineIndex, cellIndex) {
     const cellIsMarked = boardLines[lineIndex][0].cells[cellIndex].isMarked;
 
-    if (!cellIsMarked && !endRound) {
+    if (!cellIsMarked) {
       let newBoardLine = boardLines;
       newBoardLine[lineIndex][0].cells[cellIndex].isMarked = true;
       newBoardLine[lineIndex][0].cells[cellIndex].playerMarkedCell = playerTurn;
@@ -73,10 +75,14 @@ export function GameContextProvider({ children }) {
   }
 
   function handleHumanPlayerPlay(lineIndex, cellIndex) {
+    if (humanPlayer.indexOf(playerTurn) < 0) return;
+
     newPlayerPlay(lineIndex, cellIndex);
   }
 
   function handleComputerPlayerPlay() {
+    if (computerPlayer.indexOf(playerTurn) < 0) return;
+
     let lineIndex = 0;
     let cellIndex = 0;
 
@@ -94,7 +100,7 @@ export function GameContextProvider({ children }) {
 
     setTimeout(() => {
       setEndRound(false);
-    }, 2000);
+    }, 1970);
   }
 
   function declareWinner(player) {
@@ -132,6 +138,7 @@ export function GameContextProvider({ children }) {
 
     if (winner) {
       declareWinner(player);
+      return { endRound: true }
     }
 
     let markedCellCounter = 0;
@@ -146,7 +153,10 @@ export function GameContextProvider({ children }) {
 
     if (tie) {
       declareTie();
+      return { endRound: true }
     }
+
+    return { endRound: false }
   }
   
   return (

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { usePlayerContext } from '../../contexts/PlayersContext';
 import { useCellsContext } from '../../contexts/CellsContext';
 import { useGameContext } from '../../contexts/GameContext';
 
@@ -10,12 +9,6 @@ import PlayerCircle from '../../assets/circle.png';
 import './styles.css';
 
 function GameBoard() {
-  const { 
-    players,
-    computerPlayer,
-    playerTurn
-  } = usePlayerContext();
-
   const { boardLines } = useCellsContext();
 
   const {
@@ -25,19 +18,15 @@ function GameBoard() {
   } = useGameContext();
 
   useEffect(() => {
-    calculateRoundConditions();
-
-    if (computerPlayer.indexOf(playerTurn) > -1) {
-      handleComputerPlayerPlay();
-    }
+    Promise.all([calculateRoundConditions()])
+      .then(([{ endRound }]) => {
+        if (!endRound) {
+          handleComputerPlayerPlay();
+        }
+      });
   }, [
-    handleHumanPlayerPlay, 
-    computerPlayer, 
-    playerTurn, 
     calculateRoundConditions,
-    handleComputerPlayerPlay,
-    boardLines,
-    players
+    handleComputerPlayerPlay
   ]);
 
   return (
