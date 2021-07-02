@@ -3,6 +3,7 @@ import React from 'react';
 import { PlayerContextProvider } from '../../contexts/PlayersContext';
 import { CellsContextProvider } from '../../contexts/CellsContext';
 import { GameContextProvider } from '../../contexts/GameContext';
+import { PlaysContextProvider } from '../../contexts/PlaysContext';
 
 import GameModeBoard from '../GameModeBoard';
 import PlayerTurnBoard from '../PlayerTurnBoard';
@@ -15,13 +16,15 @@ function Game() {
     <PlayerContextProvider>
       <CellsContextProvider>
         <GameContextProvider>
+          <PlaysContextProvider>
 
-          <GameModeBoard />
-          <PlayerTurnBoard />
-          <GameBoard />
-          <Scoreboard />
-          <GameStatusPopUp />
+            <GameModeBoard />
+            <PlayerTurnBoard />
+            <GameBoard />
+            <Scoreboard />
+            <GameStatusPopUp />
 
+          </PlaysContextProvider>
         </GameContextProvider>
       </CellsContextProvider>
     </PlayerContextProvider>

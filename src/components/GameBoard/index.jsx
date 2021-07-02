@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useCellsContext } from '../../contexts/CellsContext';
 import { useGameContext } from '../../contexts/GameContext';
+import { usePlaysContext } from '../../contexts/PlaysContext';
 
 import PlayerTimes from '../../assets/times.png';
 import PlayerCircle from '../../assets/circle.png';
@@ -12,10 +13,13 @@ function GameBoard() {
   const { boardLines } = useCellsContext();
 
   const {
-    calculateRoundConditions, 
+    calculateRoundConditions
+  } = useGameContext();
+
+  const {
     handleHumanPlayerPlay,
     handleComputerPlayerPlay
-  } = useGameContext();
+  } = usePlaysContext();
 
   useEffect(() => {
 
