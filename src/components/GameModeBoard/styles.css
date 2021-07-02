@@ -41,6 +41,7 @@
 .game-mode-window .game-mode-board-container .game-mode-content span {
     margin-bottom: 2.7rem;
 
+    text-transform: uppercase;
     font-size: 1.8rem;
     font-weight: 500;
 }

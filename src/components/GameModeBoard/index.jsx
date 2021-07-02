@@ -21,7 +21,7 @@ function GameModeBoard() {
             <div className="game-mode-window">
               <div className="game-mode-board-container">
                 <div className="game-mode-content">
-                  <span>MODO DE JOGO</span>
+                  <span>modo de jogo</span>
 
                   <div className="choose-game-mode">
                     <div className="game-mode">
