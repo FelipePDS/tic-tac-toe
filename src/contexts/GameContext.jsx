@@ -49,15 +49,20 @@ export function GameContextProvider({ children }) {
   function toggleGameMode(newGameMode) {
     setGameMode(newGameMode);
 
-    if (newGameMode === 'computer') {
-      toggleHumanPlayer(['times']);
-      toggleComputerPlayer(['circle']);
-    }
+    const startGameMode = {
+      computer: () => {
+        toggleHumanPlayer(['times']);
+        toggleComputerPlayer(['circle']);
+      },
 
-    if (newGameMode === 'multiplayer') {
-      toggleHumanPlayer(['times', 'circle']);
-      toggleComputerPlayer(['']);
-    }
+      multiplayer: () => {
+        toggleHumanPlayer(['times', 'circle']);
+        toggleComputerPlayer(['']);
+      }
+    };
+
+    const startNewGameModes = startGameMode[newGameMode];
+    startNewGameModes();
   }
 
   function newPlayerPlay(lineIndex, cellIndex) {
