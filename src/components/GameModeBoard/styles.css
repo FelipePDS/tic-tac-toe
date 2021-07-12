@@ -63,8 +63,11 @@
 .game-mode-window .game-mode-board-container .game-mode-content .choose-game-mode .game-mode label {
   padding: .8rem;
 
-  border: 1px solid #3cfd93;
+  border: 1px solid #191c24;
   border-radius: .5rem;
+
+  background-color: #2a2e3b;
+  color: #d5d9e4;
 
   font-size: 1.45rem;
   
@@ -84,6 +87,7 @@
 
 .game-mode-window .game-mode-board-container .game-mode-content .choose-game-mode .game-mode input[type="radio"]:checked+label:hover {
   cursor: default;
+  border-color: #191c24;
 }
 
 .game-mode-window .game-mode-board-container .start-game {

@@ -55,9 +55,9 @@ function GameBoard() {
                 >
                   {
                     cell.playerMarkedCell === 'times'
-                      ? (<img src={PlayerTimes} alt={`Cell ${cell.id}`} />)
+                      ? <img src={PlayerTimes} alt={`Cell ${cell.id}`} />
                     : cell.playerMarkedCell === 'circle'
-                      && (<img src={PlayerCircle} alt={`Cell ${cell.id}`} />)
+                      && <img src={PlayerCircle} alt={`Cell ${cell.id}`} />
                   }
                 </div>
               ))
