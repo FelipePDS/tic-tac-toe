@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/static/v1?label=build&message=react.js&color=61DAFB&style=for-the-badge&logo=react&logoColor=white">
 </p>
 
-:construction: under development :construction:
+> **Note:** Computer player plays have a margin of error for him not to win or draw every time.
 
 <br>
 <h2></h2>
