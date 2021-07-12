@@ -8,6 +8,7 @@ const PlaysContext = createContext();
 
 export function PlaysContextProvider({ children }) {
   const { 
+    players,
     humanPlayer,
     computerPlayer,
     playerTurn,
@@ -21,10 +22,11 @@ export function PlaysContextProvider({ children }) {
   } = useCellsContext();
 
   const {
+    winningPossibilities,
     endRound
   } = useGameContext();
 
-  function newPlayerPlay(lineIndex, cellIndex) {
+  function handleNewPlayerPlay(lineIndex, cellIndex) {
     const cellIsMarked = boardLines[lineIndex][0].cells[cellIndex].isMarked;
 
     if (!cellIsMarked) {
@@ -41,24 +43,85 @@ export function PlaysContextProvider({ children }) {
   function handleHumanPlayerPlay(lineIndex, cellIndex) {
     if (humanPlayer.indexOf(playerTurn) < 0 || endRound) return;
 
-    newPlayerPlay(lineIndex, cellIndex);
+    handleNewPlayerPlay(lineIndex, cellIndex);
   }
 
   function handleComputerPlayerPlay() {
     if (computerPlayer.indexOf(playerTurn) < 0 || endRound) return;
 
-    let lineIndex = 0;
-    let cellIndex = 0;
+    const unmarkedCells = [];
 
-    do {
-      lineIndex = Math.floor(Math.random() * 3);
-      cellIndex = Math.floor(Math.random() * 3);
-    } while (
-      boardLines[lineIndex][0].cells[cellIndex].isMarked
+    boardLines.forEach(([line], lineIndex) => {
+      line.cells.forEach((cell, cellIndex) => {
+
+        if (!cell.isMarked) {
+          unmarkedCells.push({
+            lineIndex,
+            cellIndex,
+            id: cell.id
+          });
+        }
+
+      });
+    });
+
+    const randomUnmarkedCells = Math.floor(
+      Math.random() * unmarkedCells.length
     );
 
+    let { 
+      lineIndex, 
+      cellIndex 
+    } = unmarkedCells[randomUnmarkedCells];
+
+    
+    function calculateBestPlay(objective) {
+      const player = objective === 'win' 
+        ? players[computerPlayer[0]] 
+        : players[humanPlayer[0]];
+
+      let positionForThePlayerToWin = "";
+
+      winningPossibilities.forEach(winningPossibilitie => {
+        let playerPlaysForWinningPossibilitie = 0;
+
+        player.plays.forEach(play => {
+
+          winningPossibilitie.forEach(possibilitie => {
+            
+            if (possibilitie === play) {
+              playerPlaysForWinningPossibilitie++;
+            } else {
+              positionForThePlayerToWin = possibilitie;
+            }
+
+            if (playerPlaysForWinningPossibilitie === 2) {
+              unmarkedCells.forEach(unmarkedCell => {
+                if (unmarkedCell.id === positionForThePlayerToWin) {
+                  boardLines.forEach(([line], lineIndexOfMoment) => {
+                    line.cells.forEach((cell, cellIndexOfMoment) => {
+                  
+                      if (cell.id === positionForThePlayerToWin) {
+                        lineIndex = lineIndexOfMoment;
+                        cellIndex = cellIndexOfMoment;
+                      }
+
+                    });
+                  });
+                }
+              });
+            }
+          });
+
+        });
+      });
+    }
+
+    calculateBestPlay('win');
+    calculateBestPlay('defend');
+
     setTimeout(() => {
-      newPlayerPlay(lineIndex, cellIndex);
+      handleNewPlayerPlay(lineIndex, cellIndex);
     }, 200);
   }
 
