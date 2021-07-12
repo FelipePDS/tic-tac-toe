@@ -111,8 +111,8 @@ export function GameContextProvider({ children }) {
     let markedCellCounter = 0;
 
     boardLines.forEach(([ line ]) => {
-      line.cells.forEach(cell => {
-        cell.isMarked && markedCellCounter++;
+      line.cells.forEach(({ isMarked }) => {
+        isMarked && markedCellCounter++;
       });
     });
 
@@ -128,6 +128,7 @@ export function GameContextProvider({ children }) {
   
   return (
     <GameContext.Provider value={{
+      winningPossibilities,
       score,
       gameMode,
       toggleGameMode,
